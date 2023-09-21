@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
+    <title>Flowers 4 U</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Ocultar desbordamiento de pétalos */
+            background-color: #000; /* Fondo negro durante la carga */
+        }
+
+        /* Animación de pétalos */
+        @keyframes fallingPetal {
+            0% {
+                transform: translateY(-50px) translateX(0);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(100vh) translateX(-50vw);
+                opacity: 1;
+            }
+        }
+
+        /* Contenedor de pétalos */
+        .petals-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none; /* No interactuar con los pétalos */
+        }
+
+        /* Pétalo de sakura */
+        .petal {
+            position: absolute;
+            background-color: #ff1493; /* Color rosa */
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            opacity: 0;
+            animation: fallingPetal 5s linear infinite, spin 3s linear infinite;
+            filter: blur(1px); /* Agregar un efecto de borrosidad */
+        }
+
+        /* Animación de giro */
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Contenedor del loader */
+        .loader-container {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Estilos del loader */
+        .loader {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            animation: spin 2s linear infinite;
+        }
+
+        .loader::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #ff1493;
+            border-radius: 50%;
+            animation: pulse 1.5s ease-in-out infinite;
+            transform-origin: center;
+        }
+
+        .percentage {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            color: #ff1493; /* Color rosa */
+        }
+
+        /* Animación de pulso */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        /* Contenido de la página */
+        .content {
+            display: none; /* Ocultar contenido inicialmente */
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco transparente */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+        }
+
+        /* Césped */
+        .grass {
+            background-color: #4CAF50; /* Color verde del césped */
+            height: 100px; /* Altura del césped */
+            position: relative; /* Para que las flores estén encima del césped */
+        }
+
+        .content h1 {
+            color: #ff1493; /* Color rosa */
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor de pétalos -->
+    <div class="petals-container">
+        <!-- Generación dinámica de pétalos -->
+        <script>
+            const petalsContainer = document.querySelector('.petals-container');
+            const numberOfPetals = 200; // Número de pétalos
+            const petalSpeed = 3; // Velocidad de caída de pétalos
+
+            function createRandomPetal() {
+                const petal = document.createElement('div');
+                petal.classList.add('petal');
+                petal.style.left = `${Math.random() * 100}%`;
+                petal.style.top = `${Math.random() * 100}%`;
+                petal.style.animationDuration = `${Math.random() * petalSpeed + petalSpeed}s`; // Duración aleatoria
+                petalsContainer.appendChild(petal);
+            }
+
+            // Crear pétalos de forma aleatoria
+            for (let i = 0; i < numberOfPetals; i++) {
+                createRandomPetal();
+            }
+        </script>
+    </div>
+
+    <!-- Contenedor del loader -->
+    <div class="loader-container">
+        <!-- Loader con espiral -->
+        <div class="loader"></div>
+        <!-- Porcentaje de carga -->
+        <div class="percentage">0%</div>
+    </div>
+
+    <!-- Contenido de la página -->
+    <div class="content">
+        <!-- Césped -->
+        <div class="grass"></div>
+
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/main.css">
+        <title>Flowers 4 U</title>
+
+        <body class="container">
+            <div class="night"></div>
+            <div class="flowers">
+                <div class="flower flower--1">
+                    <div class="flower__leafs flower__leafs--1">
+                        <div class="flower__leaf flower__leaf--1"></div>
+                        <div class="flower__leaf flower__leaf--2"></div>
+                        <div class="flower__leaf flower__leaf--3"></div>
+                        <div class="flower__leaf flower__leaf--4"></div>
+                        <div class="flower__white-circle"></div>
+
+                        <div class="flower__light flower__light--1"></div>
+                        <div class="flower__light flower__light--2"></div>
+                        <div class="flower__light flower__light--3"></div>
+                        <div class="flower__light flower__light--4"></div>
+                        <div class="flower__light flower__light--5"></div>
+                        <div class="flower__light flower__light--6"></div>
+                        <div class="flower__light flower__light--7"></div>
+                        <div class="flower__light flower__light--8"></div>
+                    </div>
+                    <div class="flower__line">
+                        <div class="flower__line__leaf flower__line__leaf--1"></div>
+                        <div class="flower__line__leaf flower__line__leaf--2"></div>
+                        <div class="flower__line__leaf flower__line__leaf--3"></div>
+                        <div class="flower__line__leaf flower__line__leaf--4"></div>
+                        <div class="flower__line__leaf flower__line__leaf--5"></div>
+                        <div class="flower__line__leaf flower__line__leaf--6"></div>
+                    </div>
+                </div>
+
+                <div class="flower flower--2">
+                    <div class="flower__leafs flower__leafs--2">
+                        <div class="flower__leaf flower__leaf--1"></div>
+                        <div class="flower__leaf flower__leaf--2"></div>
+                        <div class="flower__leaf flower__leaf--3"></div>
+                        <div class="flower__leaf flower__leaf--4"></div>
+                        <div class="flower__white-circle"></div>
+
+                        <div class="flower__light flower__light--1"></div>
+                        <div class="flower__light flower__light--2"></div>
+                        <div class="flower__light flower__light--3"></div>
+                        <div class="flower__light flower__light--4"></div>
+                        <div class="flower__light flower__light--5"></div>
+                        <div class="flower__light flower__light--6"></div>
+                        <div class="flower__light flower__light--7"></div>
+                        <div class="flower__light flower__light--8"></div>
+                    </div>
+                    <div class="flower__line">
+                        <div class="flower__line__leaf flower__line__leaf--1"></div>
+                        <div class="flower__line__leaf flower__line__leaf--2"></div>
+                        <div class="flower__line__leaf flower__line__leaf--3"></div>
+                        <div class="flower__line__leaf flower__line__leaf--4"></div>
+                    </div>
+                </div>
+
+                <div class="flower flower--3">
+                    <div class="flower__leafs flower__leafs--3">
+                        <div class="flower__leaf flower__leaf--1"></div>
+                        <div class="flower__leaf flower__leaf--2"></div>
+                        <div class="flower__leaf flower__leaf--3"></div>
+                        <div class="flower__leaf flower__leaf--4"></div>
+                        <div class="flower__white-circle"></div>
+
+                        <div class="flower__light flower__light--1"></div>
+                        <div class="flower__light flower__light--2"></div>
+                        <div class="flower__light flower__light--3"></div>
+                        <div class="flower__light flower__light--4"></div>
+                        <div class="flower__light flower__light--5"></div>
+                        <div class="flower__light flower__light--6"></div>
+                        <div class="flower__light flower__light--7"></div>
+                        <div class="flower__light flower__light--8"></div>
+                    </div>
+                    <div class="flower__line">
+                        <div class="flower__line__leaf flower__line__leaf--1"></div>
+                        <div class="flower__line__leaf flower__line__leaf--2"></div>
+                        <div class="flower__line__leaf flower__line__leaf--3"></div>
+                        <div class="flower__line__leaf flower__line__leaf--4"></div>
+                    </div>
+                </div>
+            </div>
+            <script src="main.js"></script>
+        </body>
+    </div>
+
+    <!-- Simulación de carga -->
+    <script>
+        // Simular la carga de la página
+        let percentage = 0;
+        const percentageElement = document.querySelector('.percentage');
+
+        function updatePercentage() {
+            percentage++;
+            percentageElement.textContent = `${percentage}%`;
+
+            if (percentage < 100) {
+                setTimeout(updatePercentage, 20); // Actualizar el porcentaje cada 20 ms
+            } else {
+                // Cuando la carga llega al 100%, mostrar el contenido y ocultar el loader
+                const loaderContainer = document.querySelector('.loader-container');
+                const content = document.querySelector('.content');
+
+                loaderContainer.style.display = 'none';
+                content.style.display = 'block';
+            }
+        }
+
+        updatePercentage(); // Iniciar la simulación de carga
+    </script>
+</body>
+</html>
